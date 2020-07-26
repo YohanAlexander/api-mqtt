@@ -1,0 +1,28 @@
+{
+  "name": "api-mqtt",
+  "version": "1.0.0",
+  "description": "Desafio Trainee Argos",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon ./src/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YohanAlexander/api-mqtt.git"
+  },
+  "author": "Yohan Alexander",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YohanAlexander/api-mqtt/issues"
+  },
+  "homepage": "https://github.com/YohanAlexander/api-mqtt#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mqtt": "^4.1.0",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

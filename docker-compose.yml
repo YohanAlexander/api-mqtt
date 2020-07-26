@@ -1,0 +1,46 @@
+version: "3.7"
+
+services:
+
+    db:
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        container_name: db
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: argos
+        volumes:
+            - ./db/data:/var/lib/mysql
+            - ./db:/docker-entrypoint-initdb.d
+
+    broker:
+        image: eclipse-mosquitto
+        container_name: broker
+        restart: always
+        ports:
+            - "1883:1883"
+
+    api:
+        build: "./api"
+        container_name: api
+        restart: always
+        volumes:
+            - ./api:/home/node/app
+        ports:
+            - "9001:9001"
+        depends_on:
+            - broker
+            - db
+
+    web:
+        image: "php:7.2-apache"
+        container_name: website
+        restart: always
+        volumes:
+            - ./website:/var/www/html
+        ports:
+            - "8888:80"
+        depends_on:
+            - broker
+            - api
+            - db
