@@ -4,7 +4,7 @@
 
 var mqtt = require('mqtt'); //https://www.npmjs.com/package/mqtt
 var Topic = 'led'; //subscribe to all topics
-var Broker_URL = 'mqtt://localhost:1883';
+var Broker_URL = 'mqtt://broker:1883';
 var Database_URL = 'localhost';
 var Table_name = 'led_argos'
 
@@ -122,15 +122,15 @@ app.get('/led', function(req, res) {
   connection.query('SELECT * FROM led_argos', function (error, results) {
 
     if (error) {
-      throw error
+		throw error
     };
 
     res.send(results.map(led => ({ clientID: led.clientID, topic: led.topic, message: led.message })));
-  });
+	});
 });
 
 
 app.listen(9001, '0.0.0.0', function() {
-  console.log('Listening on port 9001');
+	console.log('Listening on port 9001');
 })
 
